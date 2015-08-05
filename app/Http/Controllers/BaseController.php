@@ -22,4 +22,10 @@ class BaseController extends CoreController {
         $this->_menus = config("menu");
         $this->assign('menus',$this->_menus);
     }
+
+    public function getMenuList()
+    {
+        // 加载Menu
+        return $this->_menus;
+    }
 }

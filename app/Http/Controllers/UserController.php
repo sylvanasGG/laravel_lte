@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\BaseController;
-use App\Models\User;
+use App\User;
+use App\AdminGroup;
 
 class UserController extends BaseController
 {
@@ -17,7 +18,8 @@ class UserController extends BaseController
      */
     public function getIndex()
     {
-        $users = User::orderBy('created_at','desc')->get();
+        $mod = User::orderBy('created_at','desc');
+        $users = $mod->paginate(15);
         $this->assign('users',$users);
         return $this->display('admin.user.index');
     }
@@ -28,6 +30,9 @@ class UserController extends BaseController
      */
     public function getAdd()
     {
+        //查询所有职务
+        $groupAll = AdminGroup::orderBy('cp_group_id', 'ASC')->get();
+        $this->assign('groupAll',$groupAll);
         return $this->display('admin.user.add');
     }
 
@@ -41,19 +46,16 @@ class UserController extends BaseController
     {
         //验证
         $this->validate($request, [
-            'username' => 'required|max:255|unique:users',
+            'name' => 'required|max:255|unique:users',
             'password' => 'required|min:6',
             'email'    => 'required|email|max:255|unique:users',
-            'mobile'   => 'required|min:11|unique:users',
             'cp_group_id' => 'required'
         ]);
         //新增
         User::create([
-            'username'  => $request->input('username'),
+            'name'  => $request->input('username'),
             'password'  => bcrypt($request->input('password')),
             'email'     => $request->input('email'),
-            'mobile'    => $request->input('mobile'),
-            'gender'    => $request->input('gender'),
             'cp_group_id' => $request->input('cp_group_id')
         ]);
 
@@ -63,58 +65,44 @@ class UserController extends BaseController
 
 
     /**
-     * Store a newly created resource in storage.
+     * 视图：修改用户信息
      *
-     * @param  Request  $request
-     * @return Response
+     * @param $id
+     * @return \Illuminate\View\View
      */
-    public function store(Request $request)
+    public function getEdit($id)
     {
-        //
+        $user = User::find($id);
+        //查询所有职务
+        $groupAll = AdminGroup::orderBy('cp_group_id', 'ASC')->get();
+        $this->assign('groupAll',$groupAll);
+        $this->assign('user',$user);
+        return $this->display('admin.user.edit');
     }
 
     /**
-     * Display the specified resource.
+     * 动作：修改用户信息
      *
-     * @param  int  $id
-     * @return Response
+     * @param $id
+     * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function postEdit($id,Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        //验证
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:users',
+            'password' => 'required|min:6',
+            'email'    => 'required|email|max:255|unique:users',
+            'mobile'   => 'required|min:11|unique:users',
+            'cp_group_id' => 'required'
+        ]);
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->cp_group_id = $request->input('cp_group_id');
+        if($request->has('password'))
+        {
+            $user->password = bcrypt($request->input('password'));
+        }
     }
 }

@@ -22,13 +22,13 @@ return [
         'user' => [
             'treeView' => ['name' => '用户', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'User'],
             'treeViewMenu' => [
-                ['name' => '用户列表', 'icon' => 'fa-circle-o', 'url' => "user/index", 'actionName' => 'User/index','auth' =>[
+                ['name' => '用户列表', 'icon' => 'fa-circle-o', 'url' => "/user/index", 'actionName' => 'User/index','auth' =>[
                     ''
                 ]],
-                ['name' => '增加用户', 'icon' => 'fa-circle-o', 'url' => "user/showAdd", 'actionName' => 'User/showAdd','auth' =>[
+                ['name' => '增加用户', 'icon' => 'fa-circle-o', 'url' => "/user/add", 'actionName' => 'User/showAdd','auth' =>[
                     ''
                 ]],
-                ['name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "perm/showGroupsList", 'actionName' => 'Perm/showGroupsList','auth' =>[
+                ['name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "/perm/groupList", 'actionName' => 'Perm/showGroupsList','auth' =>[
                     ''
                 ]],
             ]
