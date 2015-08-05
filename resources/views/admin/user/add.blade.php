@@ -49,6 +49,7 @@
                                         <option value="{{ $key }}">{{ $group }}</option>
                                     @endforeach
                                 </select>
+                                {{--{!! Form::select('cp_group_id',array('' => '-请选择-')+App\Cores\Core_User::$CP_GROUP,'') !!}--}}
                             </div>
                         </div>
                     </div><!-- /.box-body -->
