@@ -5,6 +5,7 @@
     <section class="content-header">
         <h1>
             用户列表
+            <a href="/user/add" class="btn btn-primary btn-sm">添加用户</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
@@ -68,5 +69,28 @@
         </div>
 
     </section><!-- /.content -->
+    <script>
+        function del(e)
+        {
+            if(!confirm('确定要删除吗？'))
+            {
+                return false;
+            }
+            var obj = $(e);
+            var id = obj.attr("rel");
+            $.ajax({
+                url: "/user/delete",
+                type: "get",
+                data: {"id":id},
+                dataType: "json",
+                success: function( result ){
+                    if ( result.ret == 0 ) {
+                        obj.parent().parent().remove();
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    </script>
 @stop
 

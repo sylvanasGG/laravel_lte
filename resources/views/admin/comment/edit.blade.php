@@ -7,7 +7,7 @@
             编辑评论
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 评论</a></li>
+            <li><a href="/comment/index"><i class="fa fa-dashboard"></i> 评论</a></li>
             <li class="active">编辑评论</li>
         </ol>
     </section>
@@ -17,9 +17,6 @@
 
         <div class="box">
             <!--内容头部-->
-            <div class="box-header with-border">
-                修改
-            </div><!-- /.box-header -->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
                 <form class="form-horizontal" name="editCommentForm" id="editCommentForm" action="/comment/edit/{{$comment->comment_id}}" method="post">
@@ -34,7 +31,7 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">邮箱</label>
                             <div class="col-sm-7">
-                                <input class="form-control" name="nickname" value="{{ $comment->email }}">
+                                <input class="form-control" name="email" value="{{ $comment->email }}">
                             </div>
                         </div>
                         <div class="form-group">

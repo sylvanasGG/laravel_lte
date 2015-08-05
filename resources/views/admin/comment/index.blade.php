@@ -17,9 +17,6 @@
 
         <div class="box">
             <!--内容头部-->
-            <div class="box-header with-border">
-                列表
-            </div><!-- /.box-header -->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
                 <table class="table table-striped">
@@ -49,7 +46,7 @@
                                 <a href="/comment/edit/{{ $comment->comment_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
                             </td>
                             <td class="col-lg-1">
-                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $comment->id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $comment->comment_id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
                             </td>
                         </tr>
                     @endforeach

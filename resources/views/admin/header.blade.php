@@ -110,15 +110,15 @@
                         <!-- The user image in the navbar-->
                         <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image"/>
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs">{{$_user->username}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
                             <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image" />
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                {{$_user->username}} - {{ $_user->adminGroup->cp_group_name }}
+                                <small>{{ date("Y-m-d H:i:s",time()) }}</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -136,10 +136,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="/user/personal-info/{{ $_user->id }}" class="btn btn-default btn-flat">个人资料</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/auth/login-out" class="btn btn-default btn-flat">退出</a>
                             </div>
                         </li>
                     </ul>

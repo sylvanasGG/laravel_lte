@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
 use Redirect, Input;
 
@@ -74,14 +74,14 @@ use App\Comment;
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Request $request, $id)
+	public function postEdit(Request $request, $id)
 	{
         $this->validate($request, [
             'nickname' => 'required',
             'content' => 'required',
         ]);
-        if (Comment::where('id', $id)->update(Input::except(['_method', '_token']))) {
-            return Redirect::to('admin/comments');
+        if (Comment::where('comment_id', $id)->update(Input::except(['_method', '_token']))) {
+            return Redirect::to('comment/index');
         } else {
             return Redirect::back()->withInput()->withErrors('更新失败！');
         }
@@ -99,10 +99,10 @@ use App\Comment;
         if(Comment::where('comment_id','=',$request->input('id'))->delete())
         {
             $data = array(
-                'ret'=>0,
-                'msg'=>'删除成功',
-            );
-            echo $data;
+            'ret'=>0,
+            'msg'=>'删除成功',
+        );
+            echo json_encode($data);
         }
 	}
 

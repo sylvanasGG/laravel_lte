@@ -30,6 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <![endif]-->
 </head>
 <body class="skin-blue">
+@include('_layouts.topInfo')
 <div class="wrapper">
 
     <!-- Header -->

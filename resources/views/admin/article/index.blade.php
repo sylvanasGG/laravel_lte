@@ -45,7 +45,7 @@
                                 {{ $article->author }}
                             </td>
                             <td class="col-lg-1">
-                                {{ $article->article_type }}
+                                {{ App\Cores\Core_Article::$ARTICLE_TYPE[$article->article_type] }}
                             </td>
                             <td class="col-lg-1">
                                 <a href="{{ $article->article_photo }}">图片</a>

@@ -4,11 +4,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            用户列表
+            用户添加
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
-            <li class="active">用户编辑</li>
+            <li><a href="/user/index"><i class="fa fa-dashboard"></i> 用户</a></li>
+            <li class="active">用户添加</li>
         </ol>
     </section>
 
@@ -17,9 +17,6 @@
 
         <div class="box">
             <!--内容头部-->
-            <div class="box-header with-border">
-                修改
-            </div><!-- /.box-header -->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
                 <form class="form-horizontal" name="registerForm" id="registerForm" action="/user/add" method="post">
@@ -48,8 +45,8 @@
                             <div class="col-sm-7">
                                 <select name="cp_group_id" id="cp_group_id" class="form-control" required>
                                     <option value="">--请选择--</option>
-                                    @foreach($groupAll as $group)
-                                        <option value="{{ $group->cp_group_id }}">{{ $group->cp_group_name }}</option>
+                                    @foreach(App\Cores\Core_User::$CP_GROUP as $key=> $group)
+                                        <option value="{{ $key }}">{{ $group }}</option>
                                     @endforeach
                                 </select>
                             </div>

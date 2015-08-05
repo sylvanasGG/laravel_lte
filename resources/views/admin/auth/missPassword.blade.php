@@ -25,28 +25,34 @@
         <a href="#"><b>Admin</b>LTE</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">后台管理系统</p>
-        <form action="/auth/login" method="post">
-            {!! csrf_field() !!}
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required"/>
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="Password" required="required"/>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
+        <p class="login-box-msg">发送邮件修改密码</p>
 
-                </div><!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
-                </div><!-- /.col -->
+        <form class="form-horizontal">
+            {!! csrf_field() !!}
+            <div class="form-group">
+                <label for="username" class="col-sm-3 control-label">用户名</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userEmail" class="col-sm-3 control-label">邮箱</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="Email" required="required">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-default">发送邮件</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userEmail" class="col-sm-4 control-label"><a href="/auth/login">现在登录！</a></label>
             </div>
         </form>
 
-        <a href="/auth/send-email-for-password">忘记密码?</a><br>
     </div><!-- /.login-box-body -->
 </div><!-- /.login-box -->
 

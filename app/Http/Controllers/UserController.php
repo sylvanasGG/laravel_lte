@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\BaseController;
 use App\User;
 use App\AdminGroup;
+use Illuminate\Support\Facades\Lang;
 
 class UserController extends BaseController
 {
@@ -46,20 +47,26 @@ class UserController extends BaseController
     {
         //验证
         $this->validate($request, [
-            'name' => 'required|max:255|unique:users',
+            'username' => 'required|max:255|unique:users',
             'password' => 'required|min:6',
             'email'    => 'required|email|max:255|unique:users',
             'cp_group_id' => 'required'
         ]);
         //新增
-        User::create([
-            'name'  => $request->input('username'),
-            'password'  => bcrypt($request->input('password')),
-            'email'     => $request->input('email'),
-            'cp_group_id' => $request->input('cp_group_id')
-        ]);
+//        User::create([
+//            'username'  => $request->input('username'),
+//            'password'  => bcrypt($request->input('password')),
+//            'email'     => $request->input('email'),
+//            'cp_group_id' => $request->input('cp_group_id')
+//        ]);
+        $user = new User();
+        $user->username = $request->input('username');
+        $user->password = bcrypt($request->input('password'));
+        $user->email = $request->input('email');
+        $user->cp_group_id = $request->input('cp_group_id');
+        $user->save();
 
-        return redirect($this->redirectPath())->with($this->statusVar, Lang::get('auth.addUserSuccess'));
+        return redirect($this->redirectPath('user/index'))->with($this->statusVar, Lang::get('auth.addUserSuccess'));
 
     }
 
@@ -90,19 +97,76 @@ class UserController extends BaseController
     {
         //验证
         $this->validate($request, [
-            'name' => 'required|max:255|unique:users',
-            'password' => 'required|min:6',
-            'email'    => 'required|email|max:255|unique:users',
-            'mobile'   => 'required|min:11|unique:users',
+            'username' => 'required|max:255',
+            'password' => 'min:6',
+            'email'    => 'required|email|max:255',
             'cp_group_id' => 'required'
         ]);
         $user = User::find($id);
-        $user->name = $request->input('name');
+        $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->cp_group_id = $request->input('cp_group_id');
         if($request->has('password'))
         {
             $user->password = bcrypt($request->input('password'));
         }
+        $user->save();
+
+        return redirect($this->redirectPath('user/index'))->with($this->statusVar, Lang::get('auth.editUserSuccess'));
+
+    }
+
+    /**
+     * 动作:删除用户
+     *
+     * @param $id
+     */
+    public function getDelete(Request $request)
+    {
+        $user = User::find($request->input('id'));
+        $user->delete();
+        $data = array(
+            'ret'=>0,
+            'msg'=>'删除成功',
+        );
+        echo json_encode($data);
+    }
+
+    /**
+     * 视图：个人资料
+     *
+     * @param $id
+     * @return View
+     */
+    public function getPersonalInfo($id)
+    {
+        $this->assign('user',User::find($id));
+        return $this->display('admin.user.personalInfo');
+    }
+
+    /**
+     * 动作：修改个人资料
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postPersonalInfo($id,Request $request)
+    {
+        //验证
+        $this->validate($request, [
+            'username' => 'required|max:255',
+            'password' => 'min:6',
+            'email'    => 'required|email|max:255'
+        ]);
+        $user = User::find($id);
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        if($request->has('password'))
+        {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
+
+        return redirect($this->redirectPath('user/index'))->with($this->statusVar, Lang::get('auth.editUserSuccess'));
     }
 }
