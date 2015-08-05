@@ -88,7 +88,7 @@ class AuthController extends Controller{
                 }
                 if(!User::where('username', '=', $request->input('username'))->first())
                 {
-                    
+
                 }
                 $userEmail = $request->input('userEmail');
                 $data = array('username' => $request->input('username'));
