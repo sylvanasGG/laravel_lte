@@ -19,6 +19,8 @@ Route::controllers([
   'admin'   => 'AdminController',
   'user'    => 'UserController',
   'auth'    => 'AuthController',
+  'article' => 'ArticleController',
+  'comment' => 'CommentController',
   'test'    => 'TestController',
 ]);
 
