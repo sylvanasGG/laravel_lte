@@ -17,9 +17,6 @@
 
         <div class="box">
             <!--内容头部-->
-            <div class="box-header with-border">
-                添加
-            </div><!-- /.box-header -->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
                 <form class="form-horizontal" name="createArticleForm" id="createArticleForm" action="/article/create" method="post" enctype="multipart/form-data">

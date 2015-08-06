@@ -18,9 +18,6 @@
 
         <div class="box">
             <!--内容头部-->
-            <div class="box-header with-border">
-                列表
-            </div><!-- /.box-header -->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
                 <table class="table table-striped">

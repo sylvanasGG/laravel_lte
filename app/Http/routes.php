@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@getIndex');
+
 
 Route::controllers([  
   'admin'   => 'AdminController',
@@ -22,7 +21,20 @@ Route::controllers([
   'article' => 'ArticleController',
   'comment' => 'CommentController',
   'test'    => 'TestController',
+    'home' => 'HomeController'
 ]);
+
+/**
+ * 前台路由组
+ */
+//Route::group(array('prefix' => 'home'), function()
+//{
+//    $HomeController = 'HomeController@';
+//    //
+//    Route::get('article/{$id}', $HomeController.'getArticle');
+//    Route::post('comment/{$id}', $HomeController.'postComment');
+//
+//});
 
 /**
  * 管理权限路由组
