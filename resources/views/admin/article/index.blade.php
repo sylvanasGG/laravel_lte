@@ -54,10 +54,10 @@
                                 {{ str_limit(strip_tags($article->content),50) }}
                             </td>
                             <td class="col-lg-1">
-                                <a href="/article/edit/{{ $article->id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                                <a href="/article/edit/{{ $article->article_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
                             </td>
                             <td class="col-lg-1">
-                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $article->id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $article->article_id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -72,5 +72,28 @@
         </div>
 
     </section><!-- /.content -->
+    <script>
+        function del(e)
+        {
+            if(!confirm('确定要删除吗？'))
+            {
+                return false;
+            }
+            var obj = $(e);
+            var id = obj.attr("rel");
+            $.ajax({
+                url: "/article/delete",
+                type: "get",
+                data: {"id":id},
+                dataType: "json",
+                success: function( result ){
+                    if ( result.ret == 0 ) {
+                        obj.parent().parent().remove();
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    </script>
 @stop
 

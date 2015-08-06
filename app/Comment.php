@@ -5,6 +5,8 @@ class Comment extends BaseModel {
 
     protected $table = 'comments';
 
+    protected $primaryKey = 'comment_id';
+
     /**
      * 多对1关系：
      *

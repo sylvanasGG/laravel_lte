@@ -7,6 +7,7 @@ class Article extends Core_Article {
 
     protected $table = 'articles';
 
+    protected $primaryKey = 'article_id';
     /**
      * 1对多关系：备注信息
      *

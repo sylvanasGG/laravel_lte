@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Article;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use Redirect, Input, Auth;
 
 class ArticleController extends BaseController {
@@ -31,23 +31,32 @@ class ArticleController extends BaseController {
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function postCreate(Request $request)
     {
+//        if($request->hasFile('article_photo')){
+//            $file = $request->file('article_photo');
+//            $clientName = $file -> getClientOriginalName();
+//            echo "{$clientName}<br>";exit;
+//        }
         $this->validate($request, [
-            'title' => 'required|unique:pages|max:255',
-            'body' => 'required',
+            'article_type'=> 'required',
+            'title' => 'required|unique:articles|max:255',
+            'content' => 'required',
         ]);
 
-        $page = new Page;
-        $page->title = Input::get('title');
-        $page->body = Input::get('body');
-        $page->user_id = 1;//Auth::user()->id;
+        $article = new Article();
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->article_type = $request->input('article_type');
+        $article->user_id = $this->_user->id;//Auth::user()->id;
+        $article->author = $this->_user->username;
 
-        if ($page->save()) {
-            return Redirect::to('admin');
-        } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+        if ($article->save()) {
+            return Redirect::to('article/index');
         }
+
+            return Redirect::back()->withInput()->withErrors('保存失败！');
+
 
     }
 
@@ -57,9 +66,11 @@ class ArticleController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        return view('admin.pages.edit')->withPage(Page::find($id));
+        $article = Article::find($id);
+        $this->assign('article', $article);
+        return $this->display('admin.article.edit');
     }
 
     /**
@@ -68,23 +79,27 @@ class ArticleController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request,$id)
+    public function postEdit(Request $request,$id)
     {
         $this->validate($request, [
-            'title' => 'required|unique:pages,title,'.$id.'|max:255',
-            'body' => 'required',
+            'article_type'=> 'required',
+            'title' => 'required|unique:articles|max:255',
+            'content' => 'required',
         ]);
 
-        $page = Page::find($id);
-        $page->title = Input::get('title');
-        $page->body = Input::get('body');
-        $page->user_id = 1;//Auth::user()->id;
+        $article = Article::find($id);
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->article_type = $request->input('article_type');
+        $article->user_id = $this->_user->id;//Auth::user()->id;
+        $article->author = $this->_user->username;
 
-        if ($page->save()) {
-            return Redirect::to('admin');
-        } else {
-            return Redirect::back()->withInput()->withErrors('保存失败！');
+        if ($article->save()) {
+            return Redirect::to('article/index');
         }
+
+        return Redirect::back()->withInput()->withErrors('保存失败！');
+
     }
 
     /**
@@ -93,12 +108,15 @@ class ArticleController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function getDelete(Request $request)
     {
-        $page = Page::find($id);
-        $page->delete();
-
-        return Redirect::to('admin');
+        $article = Article::find($request->input('id'));
+        $article->delete();
+        $data = array(
+            'ret'=>0,
+            'msg'=>'删除成功',
+        );
+        echo json_encode($data);
     }
 
     public function show($id)

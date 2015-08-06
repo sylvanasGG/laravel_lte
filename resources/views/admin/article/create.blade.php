@@ -22,31 +22,31 @@
             </div><!-- /.box-header -->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
-                <form class="form-horizontal" name="registerForm" id="registerForm" action="/user/add" method="post">
+                <form class="form-horizontal" name="createArticleForm" id="createArticleForm" action="/article/create" method="post" enctype="multipart/form-data">
                     {!! csrf_field() !!}
                     <div class="box-body">
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">文章类型</label>
                             <div class="col-sm-7">
-                                {{--{!! Form::select('article_type', array('' => '--请选择--')+App\Article::$ARTICLE_TYPE, '', array('class' => 'form-control', 'id' => 'article_type', 'required' => 'true')) !!}--}}
+                                {!! Form::select('article_type', array('' => '--请选择--')+App\Article::$ARTICLE_TYPE, '', array('class' => 'form-control', 'id' => 'article_type', 'required' => 'true')) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-sm-2 control-label">文章标题</label>
                             <div class="col-sm-7">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="密码" minlength="6" required />
+                                <input type="text" class="form-control" id="title" name="title" placeholder="文章标题" required />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email" class="col-sm-2 control-label">文章头部图片</label>
                             <div class="col-sm-7">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="邮箱" value="" required />
+                                <input type="file" name="article_photo" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="cp_group_id" class="col-sm-2 control-label">文章内容</label>
                             <div class="col-sm-7">
-
+                                <textarea name="content" class="form-control" required></textarea>
                             </div>
                         </div>
                     </div><!-- /.box-body -->
