@@ -4,10 +4,10 @@
             <div class="col-xs-12" style="text-align: center">
                 <ul class="nav nav-list">
                     <li><a href="/">首页</a></li>
-                    <li><a href="/home/game">游戏</a></li>
-                    <li><a href="/home/word">文字</a></li>
-                    <li><a href="/home/code">编程</a></li>
-                    <li><a href="/home/other">其他</a></li>
+                    <li><a href="/home/articles/{{ App\Cores\Core_Article::ARTICLE_TYPE_GAME }}">游戏</a></li>
+                    <li><a href="/home/articles/{{ App\Cores\Core_Article::ARTICLE_TYPE_WORD }}">文字</a></li>
+                    <li><a href="/home/articles/{{ App\Cores\Core_Article::ARTICLE_TYPE_CODE }}">编程</a></li>
+                    <li><a href="/home/articles/{{ App\Cores\Core_Article::ARTICLE_TYPE_OTHER }}">其他</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PHP<span class="caret"></span></a>
                         <ul class="dropdown-menu">

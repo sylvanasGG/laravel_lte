@@ -29,6 +29,20 @@ class HomeController extends Controller {
     }
 
     /**
+     * @param $type
+     * @return \Illuminate\View\View
+     */
+    public function getArticles($type)
+    {
+        $mod = Article::where('article_type', '=', $type)->orderBy('updated_at','desc');
+        $articles = $mod->paginate(3);
+//        $this->assign('articles',$articles);
+//        return $this->display('home.index');
+        return View('home.index',['articles'=>$articles]);
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
