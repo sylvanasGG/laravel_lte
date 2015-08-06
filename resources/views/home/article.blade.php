@@ -63,19 +63,18 @@
                         <div class="form-group">
                             {{--<label class="col-sm-2 control-label">评论</label>--}}
                             <div class="col-sm-offset-2 col-sm-9">
-                                <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
+                                <textarea name="content" id="newFormContent" class="form-control" rows="4" required="required" placeholder="评论"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-9">
-                                <button type="submit" class="btn btn-lg btn-success col-lg-12">Submit</button>
+                                <button type="submit" class="btn btn-lg btn-success col-lg-12">发表</button>
                             </div>
                         </div>
 
                     </form>
                     <div style="text-align: center">
                         <span ><a href="/auth/login" style="color: #3c8dbc">登录</a></span>/<a href="/home/register" style="color: #3c8dbc">注册</a><br>
-
                     </div>
                 </div>
 
