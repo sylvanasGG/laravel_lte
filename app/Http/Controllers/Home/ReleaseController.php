@@ -15,14 +15,13 @@ class ReleaseController extends BaseController {
     public function postComment(Request $request,$id)
     {
         $this->validate($request, [
-            'nickname'=> 'required',
             'content' => 'required'
         ]);
 
         $comment = new Comment();
-        $comment->nickname = $request->input('nickname');
         $comment->content = $request->input('content');
-        $comment->email = $request->input('email');
+        $comment->nickname = $this->_user->username;
+        $comment->email = $this->_user->email;
         $comment->article_id = $id;
         $comment->save();
         return Redirect::back();

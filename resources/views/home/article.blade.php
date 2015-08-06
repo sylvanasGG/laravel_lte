@@ -55,22 +55,10 @@
                         @endforeach
                 </div>
 
-                <div id="new" style="border-top: solid 5px #49B544;margin-top:20px;background-color: #ffffff;padding-bottom: 5px;">
+                <div id="new" style="border-top: solid 5px #49B544;margin-top:20px;background-color: #ffffff;padding-bottom: 5px;padding-top: 5px;">
                     <form action="/release/comment/{{$article->article_id}}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
 
-                        <div class="form-group">
-                            {{--<label class="col-sm-2 control-label">用户名</label>--}}
-                            <div class="col-sm-offset-2 col-sm-9">
-                                <input type="text" name="nickname" class="form-control" required="required" placeholder="用户名">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {{--<label class="col-sm-2 control-label">邮箱地址</label>--}}
-                            <div class="col-sm-offset-2 col-sm-9">
-                                <input type="email" name="email" class="form-control" placeholder="邮箱地址">
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             {{--<label class="col-sm-2 control-label">评论</label>--}}
