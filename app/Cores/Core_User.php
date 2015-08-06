@@ -20,6 +20,7 @@ class Core_User extends BaseModel {
      */
     const CP_GROUP_ARTICLE      =  4;
 
+
     public static $CP_GROUP = [
         self::CP_GROUP_ADMIN    => '管理员',
         self::CP_GROUP_ARTICLE  => '文章发布员',

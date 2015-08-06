@@ -36,14 +36,14 @@
 
                 <div class="conmments" >
                     @foreach($article->comment as $comment)
-                        <div class="one" style="border-top: solid 5px #49B544; padding: 0px 20px;background-color:#ffffff">
+                        <div class="one" style="border-top: solid 5px #49B544; padding: 0px 20px;background-color:#ffffff;">
                             <div class="nickname" data="{{$comment->nickname}}">
 
                                     <h3>{{$comment->nickname}}</h3>
                                 <h6>{{$comment->created_at}}</h6>
                             </div>
                             <div class="content">
-                                <p style="padding: 20px;">
+                                <p >
                                     {{$comment->content}}
                                 </p>
                             </div>
@@ -56,7 +56,7 @@
                 </div>
 
                 <div id="new" style="border-top: solid 5px #49B544;margin-top:20px;background-color: #ffffff;padding-bottom: 5px;">
-                    <form action="/home/comment/{{$article->article_id}}" method="POST" class="form-horizontal">
+                    <form action="/release/comment/{{$article->article_id}}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
 
                         <div class="form-group">
@@ -85,6 +85,10 @@
                         </div>
 
                     </form>
+                    <div style="text-align: center">
+                        <span ><a href="/auth/login" style="color: #3c8dbc">登录</a></span>/<a href="/home/register" style="color: #3c8dbc">注册</a><br>
+
+                    </div>
                 </div>
 
                 <script>

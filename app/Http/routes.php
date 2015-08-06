@@ -21,7 +21,8 @@ Route::controllers([
   'article' => 'ArticleController',
   'comment' => 'CommentController',
   'test'    => 'TestController',
-    'home' => 'HomeController'
+   'home' => 'HomeController',
+    'release' => 'Home\ReleaseController'
 ]);
 
 /**

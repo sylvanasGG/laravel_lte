@@ -41,28 +41,11 @@ class HomeController extends Controller {
         return View('home.index',['articles'=>$articles]);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function postComment(Request $request,$id)
+    public function getRegister()
     {
-        $this->validate($request, [
-            'nickname'=> 'required',
-            'content' => 'required'
-        ]);
-
-        $comment = new Comment();
-        $comment->nickname = $request->input('nickname');
-        $comment->content = $request->input('content');
-        $comment->email = $request->input('email');
-        $comment->article_id = $id;
-        $comment->save();
-        return Redirect::back();
+        return View('home.register');
     }
+
 
 
 
