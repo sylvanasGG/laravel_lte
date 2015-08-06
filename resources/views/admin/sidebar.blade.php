@@ -32,13 +32,20 @@
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
             @foreach($menus as $menu)
-                <li class="treeview">
+                <?php
+                $active = '';
+                if(str_is($menu['treeView']['actionName'].'*', $_actionName))
+                {
+                    $active = 'active';
+                }
+                ?>
+                <li class="treeview {{ $active }}">
                     <a href="#">
                         <i class="fa {{$menu['treeView']['icon']}}"></i> <span>{{$menu['treeView']['name']}}</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         @foreach($menu['treeViewMenu'] as $treeViewMenu)
-                            <li><a href="{{ $treeViewMenu['url'] }}"><i class="fa {{$treeViewMenu['icon']}}"></i> {{$treeViewMenu['name']}}</a></li>
+                            <li class="@if($_actionName == $treeViewMenu['actionName']) active @endif"><a href="{{ $treeViewMenu['url'] }}"><i class="fa {{$treeViewMenu['icon']}}"></i> {{$treeViewMenu['name']}}</a></li>
                         @endforeach
                     </ul>
                 </li>

@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Auth;
-
-
+use App\Cores\Core_Template;
 class BaseController extends CoreController {
 
     protected $_menus = '';
@@ -29,6 +25,17 @@ class BaseController extends CoreController {
         $this->_menus = config("menu");
         $this->assign('_user',$this->_user);
         $this->assign('menus',$this->_menus);
+    }
+
+    /**
+     * 设置默认模板参数
+     */
+    protected function _setDefaultTplParams()
+    {
+        parent::_setDefaultTplParams();
+        Core_Template::assignVar(array(
+            '_user' => $this->_user
+        ));
     }
 
     public function getMenuList()
