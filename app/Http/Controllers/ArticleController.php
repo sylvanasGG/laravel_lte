@@ -1,15 +1,50 @@
 <?php namespace App\Http\Controllers;
 
 use App\Article;
+use App\Comment;
 use Illuminate\Http\Request;
 use Redirect, Input, Auth;
 
 class ArticleController extends BaseController {
 
+    /**
+     * @param $mod
+     * @param Request $request
+     */
+    public function articleSearch($mod,$request)
+    {
+        $title = $author = $article_type = '';
+        if($request->has('title'))
+        {
+            $title = $request->input('title');
+            $mod->where('title','LIKE',"%$title%");
+        }
 
-    public function getIndex()
+        if($request->has('author'))
+        {
+            $author = $request->input('author');
+            $mod->where('author','LIKE',"%$author%");
+        }
+
+        if($request->has('article_type'))
+        {
+            $article_type = $request->input('article_type');
+            $mod->where('article_type','=',$article_type);
+        }
+
+        $this->assign('title', $title);
+        $this->assign('author', $author);
+        $this->assign('article_type', $article_type);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function getIndex(Request $request)
     {
         $mod = Article::orderBy('updated_at','desc');
+        $this->articleSearch($mod,$request);
         $articles = $mod->paginate(10);
         $this->assign('articles',$articles);
         return $this->display('admin.article.index');
@@ -111,6 +146,7 @@ class ArticleController extends BaseController {
     public function getDelete(Request $request)
     {
         $article = Article::find($request->input('id'));
+        Comment::where('article_id', '=', $request->input('id'))->delete();
         $article->delete();
         $data = array(
             'ret'=>0,

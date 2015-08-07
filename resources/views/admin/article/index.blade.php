@@ -17,6 +17,47 @@
 
         <div class="box">
             <!--内容头部-->
+            <div class="box-header">
+                <form action="/article/index" method="get">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 300px" />
+                            <col style="width: 250px;" />
+                            <col style="width: 200px;" />
+                            <col style="width: 100px;" />
+                            <col />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">标题</span>
+                                        <input type="text" class="form-control"  aria-describedby="basic-addon1" name="title" value="{{$title}}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">作者</span>
+                                        <input type="text" class="form-control" aria-describedby="basic-addon1" name="author" value="{{$author}}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">类型</span>
+                                        {!! Form::select('article_type', array('' => '--请选择--')+App\Article::$ARTICLE_TYPE, $article_type, array('class' => 'form-control', 'id' => 'article_type')) !!}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" type="submit">搜索</button>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
                 <table class="table table-striped">
@@ -48,7 +89,7 @@
                                 <a href="{{ $article->article_photo }}">图片</a>
                             </td>
                             <td class="col-lg-4">
-                                {{ str_limit(strip_tags($article->content),50) }}
+                                <a href="/home/article/{{ $article->article_id }}" target="_blank">{{ str_limit(strip_tags($article->content),50) }}</a>
                             </td>
                             <td class="col-lg-1">
                                 <a href="/article/edit/{{ $article->article_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>

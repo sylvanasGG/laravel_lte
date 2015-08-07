@@ -33,33 +33,49 @@
 
 
             <div id="comments" style="margin-bottom: 100px;">
+                <div>
 
-                <div class="conmments" style="background-color:#ffffff;">
-                    <table class="table table-striped">
-                        <colgroup>
-                            <col style="width: 10%" />
-                            <col style="width: 20%" />
-                            <col  />
-                            <col style="width: 10%" />
-                        </colgroup>
-                        {{--<thead>--}}
-                            {{--<tr style="background-color: #49B544">--}}
-                                {{--<th colspan="4" style="text-align: center;color: #ffffff"><h5>评论</h5></th>--}}
-                            {{--</tr>--}}
-                        {{--</thead>--}}
-                       <tbody>
-                       @foreach($article->comment as $comment)
-                        <tr>
-                            <td><div class="nickname" data="{{$comment['nickname']}}"><strong>{{$comment->nickname}}</strong></div></td>
-                            <td>{{$comment->created_at}}</td>
-                            <td style="word-break:break-all">{{$comment->content}}</td>
-                            <td><a href="#new" onclick="reply(this);">回复</a></td>
-                        </tr>
-                           @endforeach
-                       </tbody>
-                    </table>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><strong>评论</strong></a></li>
+                     </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="conmments" style="background-color:#ffffff;">
+                                <table class="table table-striped">
+                                    <colgroup>
+                                        <col  />
+                                        <col style="width: 10%" />
+                                    </colgroup>
+                                    {{--<thead>--}}
+                                    {{--<tr style="background-color: #49B544">--}}
+                                    {{--<th colspan="4" style="text-align: center;color: #ffffff"><h5>评论</h5></th>--}}
+                                    {{--</tr>--}}
+                                    {{--</thead>--}}
+                                    <tbody>
+                                    @foreach($article->comment as $comment)
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="nickname" data="{{$comment['nickname']}}"><strong>{{$comment->nickname}}</strong>&nbsp;&nbsp;{{$comment->created_at}}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="word-break:break-all">{{$comment->content}}</td>
+                                            <td><a href="#new" onclick="reply(this);" data-name="{{ $comment->nickname }}">回复</a></td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
+
+
 
                 <div id="new" style="border-top: solid 5px #49B544;margin-top:20px;background-color: #ffffff;padding-bottom: 5px;padding-top: 5px;">
                     <form action="/release/comment/{{$article->article_id}}" method="POST" class="form-horizontal">
@@ -87,7 +103,7 @@
                 <script>
                     function reply(a) {
                         var obj = $(a);
-                        var nickname = obj.parent().parent().find(".nickname").attr('data');
+                        var nickname = obj.attr('data-name');
                         var teatArea = $("#newFormContent");
                         teatArea.val('@'+nickname+' ');
                     }

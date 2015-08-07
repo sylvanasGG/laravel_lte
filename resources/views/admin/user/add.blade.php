@@ -4,11 +4,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            用户添加
+            管理员添加
         </h1>
         <ol class="breadcrumb">
-            <li><a href="/user/index"><i class="fa fa-dashboard"></i> 用户</a></li>
-            <li class="active">用户添加</li>
+            <li><a href="/user/index"><i class="fa fa-dashboard"></i> 管理员</a></li>
+            <li class="active">管理员添加</li>
         </ol>
     </section>
 
@@ -23,7 +23,7 @@
                     {!! csrf_field() !!}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">用户名</label>
+                            <label for="name" class="col-sm-2 control-label">姓名</label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="username" name="username" placeholder="用户名" value="" minlength="2" required />
                             </div>
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-sm-7">
-                                <button type="submit" class="btn btn-info">添加用户</button>
+                                <button type="submit" class="btn btn-info">添加</button>
                             </div>
                         </div>
                     </div>

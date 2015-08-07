@@ -1,10 +1,9 @@
 <?php namespace App\Http\Controllers;
 
 use App\Article;
-use App\Comment;
+use App\Visitor;
 use Illuminate\Http\Request;
 use Redirect, Input, Auth;
-
 class HomeController extends Controller {
 
 
@@ -46,6 +45,24 @@ class HomeController extends Controller {
         return View('home.register');
     }
 
+    public function postRegister(Request $request)
+    {
+        //验证
+        $this->validate($request, [
+            'username' => 'required|max:255|unique:visitors',
+            'password' => 'required|min:6',
+            'email'    => 'required|email|max:255|unique:visitors',
+        ]);
+
+        $visitor = new Visitor();
+        $visitor->username = $request->input('username');
+        $visitor->password = bcrypt($request->input('password'));
+        $visitor->email = $request->input('email');
+        $visitor->save();
+
+        return redirect('auth/login');
+        //return redirect($this->redirectPath('auth/login'))->with($this->statusVar, Lang::get('auth.addUserSuccess'));
+    }
 
 
 

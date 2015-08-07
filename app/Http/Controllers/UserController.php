@@ -12,14 +12,39 @@ use Illuminate\Support\Facades\Lang;
 
 class UserController extends BaseController
 {
+
+    /**
+     * @param $mod
+     * @param Request $request
+     */
+    public function userSearch($mod,$request)
+    {
+        $username  = $cp_group_id = '';
+        if($request->has('username'))
+        {
+            $username = $request->input('username');
+            $mod->where('username','LIKE',"%$username%");
+        }
+
+        if($request->has('cp_group_id'))
+        {
+            $cp_group_id = $request->input('cp_group_id');
+            $mod->where('cp_group_id','=',$cp_group_id);
+        }
+
+        $this->assign('username', $username);
+        $this->assign('cp_group_id', $cp_group_id);
+    }
+
     /**
      * Display a listing of the resource.
-     *
+     *@param Request $request
      * @return Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $mod = User::orderBy('created_at','desc');
+        $this->userSearch($mod,$request);
         $users = $mod->paginate(15);
         $this->assign('users',$users);
         return $this->display('admin.user.index');

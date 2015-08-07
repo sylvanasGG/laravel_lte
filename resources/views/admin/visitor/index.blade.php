@@ -4,11 +4,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            评论列表
+            用户列表
+            <a href="/visitor/add" class="btn btn-primary btn-sm">添加用户</a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 评论</a></li>
-            <li class="active">评论列表</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
+            <li class="active">用户列表</li>
         </ol>
     </section>
 
@@ -18,32 +19,33 @@
         <div class="box">
             <!--内容头部-->
             <div class="box-header">
-                <form action="/comment/index" method="get">
+                <form action="/visitor/index" method="get">
                     <table class="table">
                         <colgroup>
                             <col style="width: 300px;" />
-                            <col style="width: 250px;" />
-                            <col style="width: 250px;" />
-                            <col style="width: 100px"/>
+                            <col style="width: 300px;" />
+                            <col style="width: 200px;" />
+                            <col style="width: 100px;" />
+                            <col />
                         </colgroup>
                         <tbody>
                         <tr>
                             <td>
                                 <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">评论内容</span>
-                                    <input type="text" class="form-control" aria-describedby="basic-addon1" name="content" value="{{ $content }}">
+                                    <span class="input-group-addon" id="basic-addon1">用户名</span>
+                                    <input type="text" class="form-control" aria-describedby="basic-addon1" name="username" value="{{ $username }}">
                                 </div>
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">所属文章</span>
-                                    {!! Form::select('article_id', array('' => '--请选择--')+App\Cores\Core_Article::getAllArticle(), $article_id, array('class' => 'form-control')) !!}
+                                    <span class="input-group-addon" id="basic-addon1">邮箱</span>
+                                    <input type="email" class="form-control" aria-describedby="basic-addon1" name="email" value="{{ $email }}">
                                 </div>
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">评论时间</span>
-                                    <input type="text" class="form-control" aria-describedby="basic-addon1" >
+                                    <span class="input-group-addon" id="basic-addon1">手机</span>
+                                    <input type="text" class="form-control" aria-describedby="basic-addon1" name="phone" value="{{ $phone }}">
                                 </div>
                             </td>
                             <td>
@@ -61,32 +63,32 @@
             <div class="box-body" style="overflow-x: auto;">
                 <table class="table table-striped">
                     <tr class="row">
-                        <th class="col-lg-4">内容</th>
-                        <th class="col-lg-1">用户</th>
-                        <th class="col-lg-2">评论文章</th>
-                        <th class="col-lg-2">邮箱</th>
+                        <th class="col-lg-1">ID</th>
+                        <th class="col-lg-4">用户名</th>
+                        <th class="col-lg-3">email</th>
+                        <th class="col-lg-2">手机</th>
                         <th class="col-lg-1">编辑</th>
                         <th class="col-lg-1">删除</th>
                     </tr>
-                    @foreach($comments as $comment)
+                    @foreach($visitors as $visitor)
                         <tr class="row">
                             <td class="col-lg-1">
-                                <span data-toggle="tooltip" data-original-title="{{ $comment->content }}">{{ str_limit($comment->content,50) }}</span>
+                                {{ $visitor->visitor_id }}
+                            </td>
+                            <td class="col-lg-4">
+                                {{ $visitor->username }}
+                            </td>
+                            <td class="col-lg-3">
+                                {{ $visitor->email }}
                             </td>
                             <td class="col-lg-2">
-                                {{ $comment->nickname }}
+                                {{ $visitor->phone }}
                             </td>
                             <td class="col-lg-1">
-                                <a href="###"><span data-toggle="tooltip" data-original-title="{{ $comment->article->title }}">{{ str_limit($comment->article->title,10) }}</span></a>
+                                <a href="/visitor/edit/{{ $visitor->visitor_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="修改"></i></a>
                             </td>
                             <td class="col-lg-1">
-                                {{ $comment->email }}
-                            </td>
-                            <td class="col-lg-1">
-                                <a href="/comment/edit/{{ $comment->comment_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
-                            </td>
-                            <td class="col-lg-1">
-                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $comment->comment_id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $visitor->visitor_id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -95,7 +97,7 @@
             <!--内容尾部-->
             <div class="box-footer clearfix">
                 <div class="pull-right">
-                    {!! $comments->render() !!}
+                    {!! $visitors->render() !!}
                 </div>
             </div>
         </div>
@@ -111,7 +113,7 @@
             var obj = $(e);
             var id = obj.attr("rel");
             $.ajax({
-                url: "/comment/delete",
+                url: "/visitor/delete",
                 type: "get",
                 data: {"id":id},
                 dataType: "json",

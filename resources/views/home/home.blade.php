@@ -11,7 +11,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/asset/css/index.css") }}" rel="stylesheet" type="text/css" />
-    <link href="https://res.wx.qq.com/mpres/htmledition/images/favicon218877.ico" rel="Shortcut Icon">
+    <link href="{{ asset("/favicon.ico") }}" rel="Shortcut Icon">
     <!--     <load href="__PUBLIC__/css/page.css" / >
      -->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

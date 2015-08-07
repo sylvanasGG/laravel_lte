@@ -3,6 +3,7 @@
 namespace App\Cores;
 
 use App\BaseModel;
+use App\Article;
 
 /**
  * 核心订单模型[主要处理订单枚举类型和数据解析]
@@ -34,4 +35,17 @@ class Core_Article extends BaseModel {
         self::ARTICLE_TYPE_GAME => '游戏',
         self::ARTICLE_TYPE_OTHER => '其他',
     ];
+
+    public static function getAllArticle()
+    {
+
+        //所有文章
+        $articles = Article::orderBy('updated_at','desc')->get();
+        $articleArr = [];
+        foreach($articles as $article)
+        {
+            $articleArr[$article->article_id] = str_limit($article->title,15);
+        }
+        return $articleArr;
+    }
 }

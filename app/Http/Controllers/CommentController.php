@@ -1,21 +1,48 @@
 <?php namespace App\Http\Controllers;
 
+use App\Article;
 use Illuminate\Http\Request;
 
 use Redirect, Input;
-
+use App\Cores\Core_Article;
 use App\Comment;
     class CommentController extends BaseController {
+
+        /**
+         * @param $mod
+         * @param Request $request
+         */
+        public function commentSearch($mod,$request)
+        {
+            $content  = $article_id = '';
+            if($request->has('content'))
+            {
+                $content = $request->input('content');
+                $mod->where('content','LIKE',"%$content%");
+            }
+
+            if($request->has('article_id'))
+            {
+                $article_id = $request->input('article_id');
+                $mod->where('article_id','=',$article_id);
+            }
+
+            $this->assign('content', $content);
+            $this->assign('article_id', $article_id);
+        }
 
     /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function getIndex(Request $request)
 	{
         $mod = Comment::orderBy('updated_at','desc');
+        $this->commentSearch($mod,$request);
+
         $comments = $mod->paginate(10);
+
         $this->assign('comments',$comments);
         return $this->display('admin.comment.index');
 	}

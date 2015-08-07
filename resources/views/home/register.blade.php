@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>admin</title>
+    <title>FIRSTBLOOD</title>
     <!-- Bootstrap 3.3.4 -->
 
 
@@ -26,7 +26,7 @@
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">注册</p>
-        <form action="/auth/login" method="post">
+        <form action="/home/register" method="post">
             {!! csrf_field() !!}
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" name="username" placeholder="Username" required="required"/>
@@ -56,15 +56,7 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="{{ asset ("/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
+<script src="{{ asset ("/admin-lte/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
 
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
 </body>
 </html>

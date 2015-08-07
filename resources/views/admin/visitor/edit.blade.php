@@ -4,11 +4,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            管理员编辑
+            用户编辑
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 管理员</a></li>
-            <li class="active">管理员编辑</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> 用户</a></li>
+            <li class="active">用户编辑</li>
         </ol>
     </section>
 
@@ -19,13 +19,13 @@
             <!--内容头部-->
             <!--内容主体-->
             <div class="box-body" style="overflow-x: auto;">
-                <form class="form-horizontal" name="editUserForm" id="editUserForm" action="/user/edit/{{$user->id}}" method="post">
+                <form class="form-horizontal" name="editUserForm" id="editUserForm" action="/visitor/edit/{{$visitor->visitor_id}}" method="post">
                     {!! csrf_field() !!}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">姓名</label>
+                            <label for="name" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="用户名" value="{{ $user->username }}" minlength="2" required />
+                                <input type="text" class="form-control" id="username" name="username" placeholder="用户名" value="{{ $visitor->username }}" minlength="2" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,20 +37,16 @@
                         <div class="form-group">
                             <label for="email" class="col-sm-2 control-label">邮箱</label>
                             <div class="col-sm-7">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="邮箱" value="{{ $user->email }}" required />
+                                <input type="email" class="form-control" id="email" name="email" placeholder="邮箱" value="{{ $visitor->email }}" required />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="cp_group_id" class="col-sm-2 control-label">管理组</label>
+                            <label for="email" class="col-sm-2 control-label">手机</label>
                             <div class="col-sm-7">
-                                <select name="cp_group_id" id="cp_group_id" class="form-control" required>
-                                    <option value="">--请选择--</option>
-                                    @foreach($groupAll as $group)
-                                        <option value="{{ $group->cp_group_id }}" @if($user->cp_group_id == $group->cp_group_id) selected @endif>{{ $group->cp_group_name }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="email" class="form-control" id="phone" name="phone" placeholder="手机" value="{{ $visitor->phone }}" />
                             </div>
                         </div>
+
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <div class="form-group">

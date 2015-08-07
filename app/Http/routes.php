@@ -22,7 +22,8 @@ Route::controllers([
   'comment' => 'CommentController',
   'test'    => 'TestController',
    'home' => 'HomeController',
-    'release' => 'Home\ReleaseController'
+    'release' => 'Home\ReleaseController',
+    'visitor' => 'VisitorController'
 ]);
 
 /**
