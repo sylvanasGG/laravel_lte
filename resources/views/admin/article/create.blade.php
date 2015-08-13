@@ -2,6 +2,7 @@
 @extends('admin.app')
 
 @section('content')
+    @include('_layouts.ueditor_admin')
     <section class="content-header">
         <h1>
             添加文章
@@ -43,7 +44,7 @@
                         <div class="form-group">
                             <label for="cp_group_id" class="col-sm-2 control-label">文章内容</label>
                             <div class="col-sm-7">
-                                <textarea name="content" class="form-control" required></textarea>
+                                <script id="editor" name="content" type="text/plain"></script>
                             </div>
                         </div>
                     </div><!-- /.box-body -->

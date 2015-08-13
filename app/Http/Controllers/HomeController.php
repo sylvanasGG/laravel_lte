@@ -58,10 +58,30 @@ class HomeController extends Controller {
         $visitor->username = $request->input('username');
         $visitor->password = bcrypt($request->input('password'));
         $visitor->email = $request->input('email');
+        $visitor->phone = $request->input('phone');
         $visitor->save();
 
         return redirect('auth/login');
         //return redirect($this->redirectPath('auth/login'))->with($this->statusVar, Lang::get('auth.addUserSuccess'));
+    }
+
+    /**
+     * 动作：登录
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postLogin(Request $request)
+    {
+        if (Auth::attempt(['username' => $request->input('username'), 'password' => $request->input('password')]))
+        {
+            return redirect()->back();
+        }
+        return redirect()->intended('auth/login');
+        //   return redirect()->intended('auth/login');
+//        $user = User::find(1);
+//        Auth::login($user);
+//        return redirect()->intended('admin/admin');
     }
 
 

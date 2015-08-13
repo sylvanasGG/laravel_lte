@@ -2,6 +2,13 @@
 @extends('admin.app')
 
 @section('content')
+    @include('_layouts.ueditor_admin')
+    <script>
+        ue.ready(function(){
+            var content = $("#contID").val();
+            ue.setContent(content);
+        })
+    </script>
     <section class="content-header">
         <h1>
             文章编辑
@@ -43,9 +50,10 @@
                         <div class="form-group">
                             <label for="cp_group_id" class="col-sm-2 control-label">文章内容</label>
                             <div class="col-sm-7">
-                                <textarea name="content" class="form-control" required>{{$article->content}}</textarea>
+                                <script id="editor" name="content" type="text/plain"></script>
                             </div>
                         </div>
+                        <textarea hidden="hidden" id="contID" >{{$article->content}}</textarea>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <div class="form-group">

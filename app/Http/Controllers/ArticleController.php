@@ -118,7 +118,7 @@ class ArticleController extends BaseController {
     {
         $this->validate($request, [
             'article_type'=> 'required',
-            'title' => 'required|unique:articles|max:255',
+            'title' => 'required|max:255',
             'content' => 'required',
         ]);
 
