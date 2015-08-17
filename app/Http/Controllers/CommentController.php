@@ -14,7 +14,7 @@ use App\Comment;
          */
         public function commentSearch($mod,$request)
         {
-            $content  = $article_id = '';
+            $content  = $article_id = $created_at_start = $created_at_end = '';
             if($request->has('content'))
             {
                 $content = $request->input('content');
@@ -27,8 +27,22 @@ use App\Comment;
                 $mod->where('article_id','=',$article_id);
             }
 
+            if($request->has('created_at_start'))
+            {
+                $created_at_start = $request->input('created_at_start');
+                $mod->where('created_at','>=',$created_at_start);
+            }
+
+            if($request->has('created_at_end'))
+            {
+                $created_at_end = $request->input('created_at_end');
+                $mod->where('created_at','<=',$created_at_end);
+            }
+
             $this->assign('content', $content);
             $this->assign('article_id', $article_id);
+            $this->assign('created_at_start', $created_at_start);
+            $this->assign('created_at_end', $created_at_end);
         }
 
     /**

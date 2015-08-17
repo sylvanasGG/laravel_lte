@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'dashboard'=>[
+        'treeView' => ['name' => '仪表盘', 'icon' => 'fa-dashboard', 'url' => '#', 'actionName' => 'Admin'],
+        'treeViewMenu' => [
+            ['name' => '首页', 'icon' => 'fa-circle-o', 'url' => "/admin/index", 'actionName' => "App\Http\Controllers\AdminController@getIndex",'auth' =>[]
+            ],
+
+        ]
+    ],
         'article' => [
             'treeView' => ['name' => '文章', 'icon' => 'fa-pagelines', 'url' => '#', 'actionName' => 'App\Http\Controllers\ArticleController'],
             'treeViewMenu' => [

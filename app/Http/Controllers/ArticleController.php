@@ -13,7 +13,7 @@ class ArticleController extends BaseController {
      */
     public function articleSearch($mod,$request)
     {
-        $title = $author = $article_type = '';
+        $title = $author = $article_type = $update_at_start = $update_at_end = '';
         if($request->has('title'))
         {
             $title = $request->input('title');
@@ -32,9 +32,23 @@ class ArticleController extends BaseController {
             $mod->where('article_type','=',$article_type);
         }
 
+        if($request->has('update_at_start'))
+        {
+            $update_at_start = $request->input('update_at_start');
+            $mod->where('update_at','>=',$update_at_start);
+        }
+
+        if($request->has('update_at_end'))
+        {
+            $update_at_end = $request->input('update_at_end');
+            $mod->where('update_at','<=',$update_at_end);
+        }
+
         $this->assign('title', $title);
         $this->assign('author', $author);
         $this->assign('article_type', $article_type);
+        $this->assign('update_at_start', $update_at_start);
+        $this->assign('update_at_end', $update_at_end);
     }
 
     /**
@@ -68,23 +82,25 @@ class ArticleController extends BaseController {
      */
     public function postCreate(Request $request)
     {
-//        if($request->hasFile('article_photo')){
-//            $file = $request->file('article_photo');
-//            $clientName = $file -> getClientOriginalName();
-//            echo "{$clientName}<br>";exit;
-//        }
+
         $this->validate($request, [
             'article_type'=> 'required',
             'title' => 'required|unique:articles|max:255',
             'content' => 'required',
         ]);
 
+       // if($request->hasFile('article_photo')){
+       //     $file = $request->file('article_photo');
+       //     var_dump($file);exit;
+       //     $clientName = $file -> getClientOriginalName();
+       // }
         $article = new Article();
         $article->title = $request->input('title');
         $article->content = $request->input('content');
         $article->article_type = $request->input('article_type');
         $article->user_id = $this->_user->id;//Auth::user()->id;
         $article->author = $this->_user->username;
+        //$article->article_photo = $clientName;
 
         if ($article->save()) {
             return Redirect::to('article/index');

@@ -2,6 +2,7 @@
 @extends('admin.app')
 
 @section('content')
+<script src="{{ asset ("/asset/js/My97DatePicker/WdatePicker.js") }}"></script>
     <section class="content-header">
         <h1>
             评论列表
@@ -23,7 +24,7 @@
                         <colgroup>
                             <col style="width: 300px;" />
                             <col style="width: 250px;" />
-                            <col style="width: 250px;" />
+                            <col  />
                             <col style="width: 100px"/>
                         </colgroup>
                         <tbody>
@@ -42,9 +43,12 @@
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">评论时间</span>
-                                    <input type="text" class="form-control" aria-describedby="basic-addon1" >
+                                    <span class="input-group-addon">评论时间</span>
+                                    <input type="text" class="form-control" name="created_at_start" value="{{ $created_at_start }}" onfocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" >
+                                    <span class="input-group-addon">至</span>
+                                    <input type="text" class="form-control" name="created_at_end" value="{{ $created_at_end }}" onfocus="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" >
                                 </div>
+                               
                             </td>
                             <td>
                                 <div class="input-group">
@@ -64,7 +68,7 @@
                         <th class="col-lg-4">内容</th>
                         <th class="col-lg-1">用户</th>
                         <th class="col-lg-2">评论文章</th>
-                        <th class="col-lg-2">邮箱</th>
+                        <th class="col-lg-2">评论时间</th>
                         <th class="col-lg-1">编辑</th>
                         <th class="col-lg-1">删除</th>
                     </tr>
@@ -77,10 +81,10 @@
                                 {{ $comment->nickname }}
                             </td>
                             <td class="col-lg-1">
-                                <a href="###"><span data-toggle="tooltip" data-original-title="{{ $comment->article->title }}">{{ str_limit($comment->article->title,10) }}</span></a>
+                                <a href="/home/article/{{ $comment->article->article_id }}" target="_blank"><span data-toggle="tooltip" data-original-title="{{ $comment->article->title }}">{{ str_limit($comment->article->title,10) }}</span></a>
                             </td>
                             <td class="col-lg-1">
-                                {{ $comment->email }}
+                                {{ $comment->created_at }}
                             </td>
                             <td class="col-lg-1">
                                 <a href="/comment/edit/{{ $comment->comment_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>

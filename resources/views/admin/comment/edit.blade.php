@@ -28,12 +28,7 @@
                                 <input class="form-control" name="nickname" value="{{ $comment->nickname }}">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">邮箱</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" name="email" value="{{ $comment->email }}">
-                            </div>
-                        </div>
+                        
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-7">

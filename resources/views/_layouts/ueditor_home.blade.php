@@ -23,7 +23,7 @@
 //                'pasteplain', //纯文本粘贴模式
 //                'selectall', //全选
 //                'preview', //预览
-                'horizontal', //分隔线
+  //              'horizontal', //分隔线
                 'removeformat', //清除格式
 //                'time', //时间
 //                'date', //日期
@@ -33,10 +33,10 @@
 //                'insertparagraphbeforetable', //"表格前插入行"
 //                'insertcode', //代码语言
 //                'fontfamily', //字体
-                'fontsize', //字号
+ //               'fontsize', //字号
 //                'paragraph', //段落格式
 //                'simpleupload', //单图上传
-                'link', //超链接
+ //               'link', //超链接
 //                'emotion', //表情
 //                'spechars', //特殊字符
 //                'searchreplace', //查询替换

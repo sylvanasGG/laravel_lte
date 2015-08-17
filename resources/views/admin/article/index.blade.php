@@ -2,6 +2,7 @@
 @extends('admin.app')
 
 @section('content')
+<script src="{{ asset ("/asset/js/My97DatePicker/WdatePicker.js") }}"></script>
     <section class="content-header">
         <h1>
             文章列表
@@ -24,8 +25,8 @@
                             <col style="width: 300px" />
                             <col style="width: 250px;" />
                             <col style="width: 200px;" />
-                            <col style="width: 100px;" />
                             <col />
+                            <col style="width: 100px;"/>
                         </colgroup>
                         <tbody>
                             <tr>
@@ -48,6 +49,15 @@
                                     </div>
                                 </td>
                                 <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">最后更新时间</span>
+                                    <input type="text" class="form-control" name="update_at_start" value="{{ $update_at_start }}" onfocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" >
+                                    <span class="input-group-addon">至</span>
+                                    <input type="text" class="form-control" name="update_at_end" value="{{ $update_at_end }}" onfocus="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" >
+                                </div>
+                               
+                                </td>
+                                <td>
                                     <div class="input-group">
                                         <button class="btn btn-primary" type="submit">搜索</button>
                                     </div>
@@ -62,20 +72,16 @@
             <div class="box-body" style="overflow-x: auto;">
                 <table class="table table-striped">
                     <tr class="row">
-                        <th class="col-lg-1">ID</th>
                         <th class="col-lg-2">标题</th>
                         <th class="col-lg-1">作者</th>
                         <th class="col-lg-1">文章类型</th>
                         <th class="col-lg-1">文章图片</th>
                         <th class="col-lg-4">文章内容</th>
-                        <th class="col-lg-1">编辑</th>
-                        <th class="col-lg-1">删除</th>
+                        <th class="col-lg-2">最后更新时间</th>
+                        <th class="col-lg-1" style="text-align:center">编辑 | 删除</th>
                     </tr>
                     @foreach($articles as $article)
                         <tr class="row">
-                            <td class="col-lg-1">
-                                {{ $article->article_id }}
-                            </td>
                             <td class="col-lg-2">
                                 <span data-toggle="tooltip" data-original-title="{{ $article->title }}">{{ str_limit($article->title,10) }}</span>
                             </td>
@@ -91,11 +97,11 @@
                             <td class="col-lg-4">
                                 <a href="/home/article/{{ $article->article_id }}" target="_blank">{{ str_limit(strip_tags($article->content),50) }}</a>
                             </td>
-                            <td class="col-lg-1">
-                                <a href="/article/edit/{{ $article->article_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                            <td class="col-lg-2">
+                                {{ $article->updated_at }}
                             </td>
-                            <td class="col-lg-1">
-                                <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $article->article_id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                            <td class="col-lg-1" style="text-align:center">
+                                <a href="/article/edit/{{ $article->article_id }}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="del" onclick="del(this)" rel="{{ $article->article_id }}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
                             </td>
                         </tr>
                     @endforeach
