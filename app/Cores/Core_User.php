@@ -18,7 +18,7 @@ class Core_User extends BaseModel {
     /*
      * 管理组：文章发布员
      */
-    const CP_GROUP_ARTICLE      =  4;
+    const CP_GROUP_ARTICLE      =  5;
 
 
     public static $CP_GROUP = [

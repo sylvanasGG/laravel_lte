@@ -35,4 +35,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasOne('App\AdminGroup','cp_group_id','cp_group_id');
     }
+
+    /* 状态 */
+    const STATUS_ACTIVATED  = 0;
+    const STATUS_DISABLED   = 1;
+    public static $STATUS = array(
+        self::STATUS_ACTIVATED  => '已激活',
+        self::STATUS_DISABLED   => '已禁用'
+    );
+    public static $STATUS_HTML = array(
+        self::STATUS_ACTIVATED  => '已激活',
+        self::STATUS_DISABLED   => '<span style="color: red;">已禁用</span>'
+    );
 }

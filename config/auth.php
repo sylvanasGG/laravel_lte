@@ -64,4 +64,8 @@ return [
         'expire' => 60,
     ],
 
+    /**
+     * 系统管理员配置
+     */
+    'systemAdmin' => '1',
 ];

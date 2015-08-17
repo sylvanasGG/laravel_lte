@@ -22,6 +22,7 @@
             </div><!-- /.box-header -->
             <div class="box-body" style="overflow-x: auto;">
                 <form action="/perm/groupList" method="post">
+                    {!! csrf_field() !!}
                     <div class="box-body">
                         <table class="table table-bordered table-hover">
                             <colgroup>

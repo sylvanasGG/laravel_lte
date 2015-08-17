@@ -9,5 +9,7 @@ class AdminGroup extends BaseModel {
      */
     protected $table = 'admin_groups';
 
+    protected $primaryKey = 'cp_group_id';
+
 
 }
