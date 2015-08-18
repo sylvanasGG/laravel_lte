@@ -30,9 +30,13 @@ class AdminAccess extends BaseModel {
      */
     public static function checkIsSystemAdmin($user)
     {
-        $founders = str_replace(' ', '', Config('auth.systemAdmin'));
-        //匹配系统管理员ID
-        if(str_contains(",{$founders},", ",{$user->uid},"))
+//        $founders = str_replace(' ', '', Config('auth.systemAdmin'));
+//        //匹配系统管理员ID
+//        if(str_contains(",{$founders},", ",{$user->uid},"))
+//        {
+//            return true;
+//        }
+        if($user->uid == config('auth.systemAdmin'))
         {
             return true;
         }

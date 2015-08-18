@@ -23,21 +23,21 @@ class BaseController extends CoreController {
         //获取配置文件中的menu目录
         //验证当前登录用户
 
-//        if( !Auth::check())
-//        {
-//           // return redirect()->intended('auth/login');
-//            return redirect($this->redirectPath('auth/login'));
-//        }
+        if( !Auth::check())
+        {
+           // return redirect()->intended('auth/login');
+            return redirect($this->redirectPath('auth/login'));
+        }
 //        var_dump(Auth::user());exit;
         $this->_user = Auth::user();
         $this->_menus = config("menu");
         $this->assign('_user',$this->_user);
         //权限验证
-        if (! $this->allow())
-        {
-            return back()->withErrors([Lang::get('access.accessNotAllow')]);
-        }
-        $this->assign('menus',$this->getAccessMenuList());
+//        if (! $this->allow())
+//        {
+//            return back()->withErrors([Lang::get('access.accessNotAllow')]);
+//        }
+        $this->assign('menus',$this->_menus);
     }
 
     /**

@@ -36,9 +36,9 @@ return [
                 ['name' => '增加管理员', 'icon' => 'fa-circle-o', 'url' => "/user/add", 'actionName' => 'App\Http\Controllers\UserController@getAdd','auth' =>[
                     ''
                 ]],
-                ['name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "/perm/groupList", 'actionName' => 'Perm/showGroupsList','auth' =>[
-                    ''
-                ]],
+//                ['name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "/perm/groupList", 'actionName' => 'Perm/showGroupsList','auth' =>[
+//                    ''
+//                ]],
             ]
         ],
     'visitor' => [
@@ -50,6 +50,15 @@ return [
             ['name' => '增加用户', 'icon' => 'fa-circle-o', 'url' => "/visitor/add", 'actionName' => 'App\Http\Controllers\VisitorController@getAdd','auth' =>[
                 ''
             ]]
+        ]
+    ],
+    'example' => [
+        'treeView' => ['name' => '示例', 'icon' => 'fa-folder', 'url' => '#', 'actionName' => 'App\Http\Controllers\ExampleController'],
+        'treeViewMenu' => [
+            ['name' => '联系记录', 'icon' => 'fa-circle-o', 'url' => "/example/contact", 'actionName' => 'App\Http\Controllers\VisitorController@getContact','auth' =>[
+                ''
+            ]],
+
         ]
     ],
     ];

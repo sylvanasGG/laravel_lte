@@ -2,7 +2,7 @@
 @extends('admin.app')
 
 @section('content')
-<script src="{{ asset ("/asset/js/My97DatePicker/WdatePicker.js") }}"></script>
+
     <section class="content-header">
         <h1>
             文章列表

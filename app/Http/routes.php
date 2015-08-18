@@ -23,7 +23,8 @@ Route::controllers([
   'test'    => 'TestController',
    'home' => 'HomeController',
     'release' => 'Home\ReleaseController',
-    'visitor' => 'VisitorController'
+    'visitor' => 'VisitorController',
+    'example'=> 'ExampleController'
 ]);
 
 /**
