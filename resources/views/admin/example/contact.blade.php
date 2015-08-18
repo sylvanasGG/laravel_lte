@@ -3,6 +3,7 @@
 
 @section('content')
 <script src="{{ asset ("/asset/layer/layer.js") }}"></script>
+<script src="{{ asset ("/asset/js/lib.js") }}"></script>
     <section class="content-header">
         <h1>
             文章列表
@@ -37,24 +38,24 @@
                             <colgroup>
                                 <col style="width: 50px;"/>
                                 <col style="width: 160px;"/>
-                                <col style="width: 400px;"/>
+                                <col style="width: 300px;"/>
                                 <col style="width: 80px;"/>
-                                <col style="width: 190px;" span="2" />
-                                <col style="width: 110px;"/>
+                                <col style="width: 150px;" span="2" />
+                                <col style="width: 50px;"/>
                                 <col style="width: 110px;" />
                                 <col />
                             </colgroup>
                             <thead class="td-title-bg">
                             <tr style="background-color: #ffffff;">
-                                <td>删除</td>
-                                <td>联系时间</td>
-                                <td>内容</td>
-                                <td>类型</td>
-                                <td>联系人</td>
-                                <td>联系电话</td>
-                                <td>下次联系</td>
-                                <td>操作员</td>
-                                <td>操作</td>
+                                <td><strong>删除</strong></td>
+                                <td><strong>联系时间</strong></td>
+                                <td><strong>内容</strong></td>
+                                <td><strong>类型</strong></td>
+                                <td><strong>联系人</strong></td>
+                                <td><strong>联系电话</strong></td>
+                                <td><strong>下次联系</strong></td>
+                                <td><strong>操作员</strong></td>
+                                <td><strong>操作</strong></td>
                             </tr>
                             </thead>
                         </table>
@@ -63,10 +64,10 @@
                                 <colgroup>
                                     <col style="width: 50px;"/>
                                     <col style="width: 160px;"/>
-                                    <col style="width: 400px;"/>
+                                    <col style="width: 300px;"/>
                                     <col style="width: 80px;"/>
-                                    <col style="width: 190px;" span="2" />
-                                    <col style="width: 110px;"/>
+                                    <col style="width: 150px;" span="2" />
+                                    <col style="width: 50px;"/>
                                     <col style="width: 110px;" />
                                     <col />
                                 </colgroup>
@@ -145,13 +146,13 @@
                 '<div class="float-info input-group-sm">'+
                 '<label for="contact_type">下次联系：</label>'+
                 '<label><input checked="checked" name="contact_on" type="radio" value="1">是</label>'+
-                '<label><input checked="checked" name="contact_on" type="radio" value="0">否</label>'+
+                '<label><input name="contact_on" type="radio" value="0">否</label>'+
                 '</div>'+
                 '</div>'+
                 '<div class="modal-footer" style="padding: 10px 15px">'+
                 '<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="layer.closeAll();">取消</button>'+
                 '   '+
-                '<button type="button" class="btn btn-primary btn-sm" name="contactSubmit" id="submitC" onclick="submitAddContact(this)">确定</button>'+
+                '<button type="button" class="btn btn-primary btn-sm" name="contactSubmit" onclick="submitAddContact(this)">确定</button>'+
                 '</div>'+
                 '</form>';
         layer.open({
@@ -207,7 +208,7 @@
                 '<div class="float-info input-group-sm">'+
                 '<label for="contact_type">下次联系：</label>'+
                 '<label><input checked="checked" name="contact_on" type="radio" value="1">是</label>'+
-                '<label><input checked="checked" name="contact_on" type="radio" value="0">否</label>'+
+                '<label><input name="contact_on" type="radio" value="0">否</label>'+
                 '</div>'+
                 '</div>'+
                 '<div class="modal-footer" style="padding: 10px 15px">'+
@@ -260,8 +261,8 @@
     function submitAddContact(e)
     {
         $.ajax({
-            url: "/orders/addContactRecord",
-            type: "POST",
+            url: "/example/insertContact",
+            type: "post",
             data: $("#alertForm2").serializeArray(),
             dataType: "json",
             success: function( result ){
@@ -276,7 +277,6 @@
                             [1,'<input type="checkbox" class="checkbox" name="deleteids[]" value='+result.data.id+' />']
                             , [1, '<span name="contact_time">'+result.data.contact_time+'</span>']
                             , [1,'<span name="content">'+result.data.content+'</span>']
-                            , [1,'<span name="telephone">'+result.data.telephone+'</span>']
                             , [1,'<span name="contact_type">'+lineType+'</span>']
                             , [1,'<span name="contact_man">'+result.data.contact_man+'</span>']
                             , [1,'<span name="contact_phone">'+result.data.contact_phone+'</span>']

@@ -24,7 +24,6 @@ Route::controllers([
    'home' => 'HomeController',
     'release' => 'Home\ReleaseController',
     'visitor' => 'VisitorController',
-    'example'=> 'ExampleController'
 ]);
 
 /**
@@ -51,4 +50,15 @@ Route::group(array('prefix' => 'perm'), function()
     Route::get('group/{id}', $PermController.'getGroup');
     Route::post('group/{id}', $PermController.'postGroup');
 
+});
+
+/**
+ * 事例路由组
+ */
+Route::group(array('prefix' => 'example'), function()
+{
+    $ExampleController = 'ExampleController@';
+    //联系记录
+    Route::get('contact', $ExampleController.'getContact');
+    Route::post('insertContact', $ExampleController.'postInsertContact');
 });
