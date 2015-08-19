@@ -61,4 +61,5 @@ Route::group(array('prefix' => 'example'), function()
     //联系记录
     Route::get('contact', $ExampleController.'getContact');
     Route::post('insertContact', $ExampleController.'postInsertContact');
+    Route::post('deleteContact', $ExampleController.'deleteContact');
 });

@@ -9,7 +9,7 @@ class ExampleController extends BaseController {
 
     public function getContact()
     {
-        $contacts = Contact::orderBy('updated_at','desc')->get();
+        $contacts = Contact::orderBy('updated_at','asc')->get();
         $this->assign('contacts',$contacts);
         return $this->display('admin.example.contact');
     }
@@ -48,7 +48,7 @@ class ExampleController extends BaseController {
                         'data'=>$contactRecord->toArray()
                     ];
                 exit(json_encode($data));
-                $this->exitJson(Core_Modret::RET_SUCC,'','',$contactRecord->toArray());
+                //$this->exitJson(Core_Modret::RET_SUCC,'','',$contactRecord->toArray());
             } else
             {
                 $this->exitJson(Core_Modret::RET_SAVE_FAILED,"保存失败");
@@ -57,6 +57,32 @@ class ExampleController extends BaseController {
         {
             $this->exitJson(Core_Modret::RET_MISS_ARG,"缺少必要字段");
         }
+    }
+
+    /**
+     * 动作：批量删除联系记录
+     */
+    public function deleteContact(Request $request)
+    {
+        //删除
+        if($request->has('deleteids'))
+        {
+            $ids = $request->input('deleteids');
+            //执行批量删除联系记录
+            Contact::destroy($ids);
+            //更新联系次数和最后一次联系时间
+            $data = array(
+                'ret'=>0,
+                //'msg'=>'删除成功'
+            );
+            exit(json_encode($data));
+            //$this->exitJson(Core_Modret::RET_SUCC,"删除记录成功");
+        }
+        //$this->exitJson(Core_Modret::RET_SAVE_FAILED,"请选择需要删除的记录");
+        $data = array(
+            'ret'=>1,
+            'msg'=>'请选择需要删除的记录');
+        exit(json_encode($data));
     }
 
 }

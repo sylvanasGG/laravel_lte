@@ -4,6 +4,7 @@
 @section('content')
 <script src="{{ asset ("/asset/layer/layer.js") }}"></script>
 <script src="{{ asset ("/asset/js/lib.js") }}"></script>
+<script src="{{ asset ("/asset/js/mgr.js") }}"></script>
     <section class="content-header">
         <h1>
             文章列表
@@ -32,7 +33,7 @@
             <div class="box-body" style="overflow-x: auto;">
                 <div class="table-responsive" >
                     <form name="contactform" method="post"  id="contactform">
-                        <input type="hidden" name="_method" value="DELETE" />
+
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <table class="table table-bordered table-hover" style="margin: 0;padding: 0;" cellpadding="0" cellspacing="0">
                             <colgroup>
@@ -128,7 +129,7 @@
                 '</div>'+
                 '<div class="float-info">'+
                 '<label for="contact_type" >联系类型：</label>'+
-                '<label><input checked="checked" name="contact_type" type="radio" value="1">打进</label>'+
+                '<label><input checked="checked" name="contact_type" type="radio" value="1">打入</label>'+
                 '<label><input name="contact_type" type="radio" value="0">打出</label>'+
                 '</div>'+
                 '<div class="float-info input-group-sm">'+
@@ -241,7 +242,7 @@
         var checkbox = div.find("input:checked");
         tinyLoading.show( target );
         $.ajax({
-            url: "/orders/deleteContactRecord",
+            url: "/example/deleteContact",
             type: "POST",
             data: $("#contactform").serializeArray(),
             dataType: "json",
